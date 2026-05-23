@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Akun</title>
+
+<style>
+
+body{
+font-family:Arial;
+padding:20px;
+background:#f3f7f4;
+}
+
+.card{
+background:white;
+padding:25px;
+border-radius:20px;
+text-align:center;
+}
+
+img{
+width:100px;
+margin-bottom:15px;
+}
+
+button{
+background:#dc2626;
+color:white;
+border:none;
+padding:12px 18px;
+border-radius:12px;
+margin-top:20px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="card">
+
+<img src="logo.png">
+
+<h2 id="nama"></h2>
+
+<p>Siswa Matsahad 62</p>
+
+<button onclick="logout()">
+Logout
+</button>
+
+</div>
+
+<script>
+
+document.getElementById('nama').innerText =
+localStorage.getItem('namaSiswa');
+
+function logout(){
+
+localStorage.clear();
+
+window.location.href='index.html';
+
+}
+
+</script>
+
+</body>
+</html>
