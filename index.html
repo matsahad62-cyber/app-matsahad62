@@ -116,6 +116,8 @@ let pass = document.querySelectorAll('input')[1].value;
 
 if(user=="siswa" && pass=="12345"){
 
+localStorage.setItem("namaSiswa",user);
+
 window.location.href='dashboard.html';
 
 }else{
