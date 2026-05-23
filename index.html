@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Matsahad 62 - Aplikasi Ujian</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,sans-serif;
+}
+
+body{
+background:#f3f7f4;
+color:#1f2937;
+padding-bottom:80px;
+}
+
+.header{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:20px;
+background:white;
+box-shadow:0 2px 10px rgba(0,0,0,0.05);
+position:sticky;
+top:0;
+z-index:999;
+}
+
+.logo-area{
+display:flex;
+align-items:center;
+gap:12px;
+}
+
+.logo-area img{
+width:55px;
+height:55px;
+object-fit:contain;
+}
+
+.logo-text h1{
+font-size:24px;
+color:#14532d;
+}
+
+.logo-text p{
+color:#6b7280;
+font-size:14px;
+}
+
+.container{
+padding:20px;
+}
+
+.banner{
+width:100%;
+border-radius:24px;
+overflow:hidden;
+margin-bottom:25px;
+box-shadow:0 10px 20px rgba(0,0,0,0.05);
+}
+
+.banner img{
+width:100%;
+display:block;
+}
+
+.section-title{
+font-size:24px;
+font-weight:bold;
+margin-bottom:18px;
+color:#111827;
+}
+
+.exam-card{
+background:white;
+border-radius:22px;
+padding:20px;
+box-shadow:0 5px 15px rgba(0,0,0,0.05);
+margin-bottom:25px;
+}
+
+.exam-title{
+font-size:22px;
+font-weight:bold;
+margin-bottom:10px;
+color:#166534;
+}
+
+.exam-info{
+color:#6b7280;
+line-height:1.8;
+margin-bottom:20px;
+}
+
+.btn{
+background:#166534;
+color:white;
+border:none;
+padding:14px 22px;
+border-radius:14px;
+font-size:16px;
+font-weight:bold;
+cursor:pointer;
+}
+
+.menu-grid{
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:15px;
+margin-top:15px;
+}
+
+.menu{
+background:white;
+padding:20px;
+border-radius:20px;
+text-align:center;
+box-shadow:0 5px 15px rgba(0,0,0,0.05);
+}
+
+.menu-icon{
+font-size:40px;
+margin-bottom:10px;
+}
+
+.menu h3{
+margin-bottom:5px;
+}
+
+.menu p{
+font-size:14px;
+color:#6b7280;
+}
+
+.info{
+background:white;
+padding:20px;
+border-radius:20px;
+margin-top:25px;
+box-shadow:0 5px 15px rgba(0,0,0,0.05);
+line-height:1.7;
+}
+
+.bottom-nav{
+position:fixed;
+bottom:0;
+left:0;
+width:100%;
+background:white;
+display:flex;
+justify-content:space-around;
+padding:12px 0;
+box-shadow:0 -2px 10px rgba(0,0,0,0.08);
+}
+
+.nav-item{
+text-align:center;
+font-size:14px;
+color:#374151;
+}
+
+.nav-item.active{
+color:#166534;
+font-weight:bold;
+}
+
+.warning{
+display:none;
+position:fixed;
+inset:0;
+background:rgba(0,0,0,0.9);
+z-index:99999;
+justify-content:center;
+align-items:center;
+padding:20px;
+text-align:center;
+color:white;
+}
+
+.warning-box{
+background:#111827;
+padding:30px;
+border-radius:20px;
+max-width:400px;
+}
+
+.warning-box h2{
+margin-bottom:15px;
+}
+
+@media(max-width:600px){
+
+.menu-grid{
+grid-template-columns:1fr 1fr;
+}
+
+.logo-text h1{
+font-size:20px;
+}
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="warning" id="warningBox">
+
+<div class="warning-box">
+
+<h2>⚠ Keluar dari Mode Ujian</h2>
+
+<p>
+Anda terdeteksi membuka aplikasi lain atau keluar fullscreen.
+</p>
+
+<br>
+
+<button class="btn" onclick="backFullscreen()">
+Kembali ke Ujian
+</button>
+
+</div>
+
+</div>
+
+<div class="header">
+
+<div class="logo-area">
+
+<img src="logo.png">
+
+<div class="logo-text">
+<h1>Matsahad 62</h1>
+<p>Aplikasi Ujian</p>
+</div>
+
+</div>
+
+<div style="font-size:26px">
+🔔
+</div>
+
+</div>
+
+<div class="container">
+
+<div class="banner">
+<img src="banner.png">
+</div>
+
+<div class="section-title">
+Ujian Aktif
+</div>
+
+<div class="exam-card">
+
+<div class="exam-title">
+Ujian Akhir Semester Genap
+</div>
+
+<div class="exam-info">
+Mata Pelajaran: Matematika<br>
+Tanggal: 20 Mei 2026<br>
+Jam: 08:00 - 10:00
+</div>
+
+<button class="btn" onclick="mulaiUjian()">
+Mulai Ujian
+</button>
+
+</div>
+
+<div class="section-title">
+Menu
+</div>
+
+<div class="menu-grid">
+
+<div class="menu">
+<div class="menu-icon">📄</div>
+<h3>Daftar Ujian</h3>
+<p>Lihat semua ujian</p>
+</div>
+
+<div class="menu">
+<div class="menu-icon">📊</div>
+<h3>Riwayat</h3>
+<p>Hasil ujian</p>
+</div>
+
+<div class="menu">
+<div class="menu-icon">📚</div>
+<h3>Materi</h3>
+<p>Materi pembelajaran</p>
+</div>
+
+<div class="menu">
+<div class="menu-icon">❓</div>
+<h3>Bantuan</h3>
+<p>Panduan aplikasi</p>
+</div>
+
+</div>
+
+<div class="info">
+
+<b>Informasi:</b>
+
+<br><br>
+
+Pastikan koneksi internet stabil dan baterai cukup sebelum memulai ujian.
+
+</div>
+
+</div>
+
+<div class="bottom-nav">
+
+<div class="nav-item active">
+🏠<br>Beranda
+</div>
+
+<div class="nav-item">
+📝<br>Ujian
+</div>
+
+<div class="nav-item">
+🕒<br>Riwayat
+</div>
+
+<div class="nav-item">
+👤<br>Akun
+</div>
+
+</div>
+
+<script>
+
+let pelanggaran = 0;
+
+function mulaiUjian(){
+
+aktifFullscreen();
+
+alert("Mode ujian dimulai");
+
+}
+
+async function aktifFullscreen(){
+
+const el = document.documentElement;
+
+if(el.requestFullscreen){
+await el.requestFullscreen();
+}
+
+}
+
+function backFullscreen(){
+
+document.getElementById('warningBox').style.display='none';
+
+aktifFullscreen();
+
+}
+
+document.addEventListener('visibilitychange',function(){
+
+if(document.hidden){
+
+pelanggaran++;
+
+document.getElementById('warningBox').style.display='flex';
+
+}
+
+});
+
+document.addEventListener('fullscreenchange',()=>{
+
+if(!document.fullscreenElement){
+
+document.getElementById('warningBox').style.display='flex';
+
+}
+
+});
+
+document.addEventListener('contextmenu',e=>e.preventDefault());
+
+document.addEventListener('copy',e=>e.preventDefault());
+
+document.addEventListener('paste',e=>e.preventDefault());
+
+</script>
+
+</body>
+</html>
