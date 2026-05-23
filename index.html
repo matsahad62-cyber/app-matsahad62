@@ -374,27 +374,9 @@ aktifFullscreen();
 
 }
 
-document.addEventListener('visibilitychange',function(){
+// sementara dimatikan saat testing
 
-if(document.hidden){
 
-pelanggaran++;
-
-document.getElementById('warningBox').style.display='flex';
-
-}
-
-});
-
-document.addEventListener('fullscreenchange',()=>{
-
-if(!document.fullscreenElement){
-
-document.getElementById('warningBox').style.display='flex';
-
-}
-
-});
 
 document.addEventListener('contextmenu',e=>e.preventDefault());
 
