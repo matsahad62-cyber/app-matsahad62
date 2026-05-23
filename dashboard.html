@@ -209,6 +209,8 @@ font-size:20px;
 }
 
 </style>
+  <link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#166534">
 </head>
 
 <body>
@@ -413,7 +415,15 @@ document.addEventListener('paste',e=>e.preventDefault());
 
 document.getElementById("namaSiswa").innerText =
 localStorage.getItem("namaSiswa");
+<script>
 
+if ('serviceWorker' in navigator) {
+
+navigator.serviceWorker.register('service-worker.js');
+
+}
+
+</script>
 </script>
 </body>
 </html>
