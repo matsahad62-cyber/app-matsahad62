@@ -5,11 +5,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>CBT Matsahad 62</title>
-
-<link rel="manifest" href="manifest.json">
-
-<meta name="theme-color" content="#166534">
+<title>Login CBT Matsahad 62</title>
 
 <style>
 
@@ -21,69 +17,17 @@ font-family:Arial,sans-serif;
 }
 
 body{
-background:#166534;
-overflow:hidden;
-}
-
-/* SPLASH */
-
-#splash{
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100vh;
-background:#166534;
+background:#f3f7f4;
 display:flex;
 justify-content:center;
 align-items:center;
-z-index:9999;
-}
-
-.splash-content{
-text-align:center;
-color:white;
-}
-
-.logo{
-width:120px;
-background:white;
-padding:15px;
-border-radius:30px;
-margin-bottom:20px;
-animation:pulse 2s infinite;
-}
-
-.loading{
-width:220px;
-height:8px;
-background:rgba(255,255,255,0.2);
-border-radius:20px;
-overflow:hidden;
-margin-top:20px;
-}
-
-.bar{
-height:100%;
-width:0%;
-background:white;
-animation:load 3s linear forwards;
-}
-
-/* LOGIN */
-
-#loginPage{
-display:none;
-background:#f3f7f4;
-height:100vh;
-justify-content:center;
-align-items:center;
+min-height:100vh;
 padding:20px;
 }
 
 .login-box{
 background:white;
-padding:35px;
+padding:30px 22px;
 border-radius:25px;
 width:100%;
 max-width:400px;
@@ -91,7 +35,7 @@ box-shadow:0 10px 20px rgba(0,0,0,0.08);
 text-align:center;
 }
 
-.login-logo{
+.logo{
 width:90px;
 margin-bottom:20px;
 }
@@ -99,6 +43,7 @@ margin-bottom:20px;
 h1{
 color:#166534;
 margin-bottom:10px;
+font-size:28px;
 }
 
 p{
@@ -127,22 +72,14 @@ border-radius:14px;
 cursor:pointer;
 }
 
-@keyframes load{
-100%{
-width:100%;
-}
+button:hover{
+background:#14532d;
 }
 
-@keyframes pulse{
-0%{
-transform:scale(1);
-}
-50%{
-transform:scale(1.05);
-}
-100%{
-transform:scale(1);
-}
+.info{
+margin-top:20px;
+font-size:14px;
+color:#6b7280;
 }
 
 </style>
@@ -151,39 +88,13 @@ transform:scale(1);
 
 <body>
 
-<!-- SPLASH -->
-
-<div id="splash">
-
-<div class="splash-content">
+<div class="login-box">
 
 <img src="logo.png" class="logo">
 
 <h1>CBT Matsahad 62</h1>
 
-<p>Sistem Ujian Berbasis Komputer</p>
-
-<div class="loading">
-
-<div class="bar"></div>
-
-</div>
-
-</div>
-
-</div>
-
-<!-- LOGIN -->
-
-<div id="loginPage">
-
-<div class="login-box">
-
-<img src="logo.png" class="login-logo">
-
-<h1>Login CBT</h1>
-
-<p>Masuk menggunakan akun siswa</p>
+<p>Login menggunakan akun siswa</p>
 
 <input type="text" id="user"
 placeholder="Username">
@@ -195,24 +106,14 @@ placeholder="Password">
 Masuk
 </button>
 
+<div class="info">
+MTs Matsahad 62
 </div>
 
 </div>
 
 <script>
 
-// tampilkan login setelah splash
-setTimeout(function(){
-
-document.getElementById("splash").style.display = "none";
-
-document.getElementById("loginPage").style.display = "flex";
-
-document.body.style.background = "#f3f7f4";
-
-},3000);
-
-// login
 function login(){
 
 let user =
@@ -232,13 +133,6 @@ window.location.href='dashboard.html';
 alert("Username atau Password salah");
 
 }
-
-}
-
-// PWA
-if ('serviceWorker' in navigator) {
-
-navigator.serviceWorker.register('service-worker.js');
 
 }
 
