@@ -217,9 +217,25 @@ soal:"5 x 5 = ?",
 pilihan:["10","15","20","25"],
 jawaban:"25"
 }
+{
+soal:"Planet terbesar adalah?",
+pilihan:["Mars","Jupiter","Venus","Bumi"],
+jawaban:"Jupiter"
+},
 
+{
+soal:"10 x 10 = ?",
+pilihan:["10","50","100","150"],
+jawaban:"100"
+},
+
+{
+soal:"Bahasa resmi Indonesia adalah?",
+pilihan:["Jawa","Sunda","Indonesia","Arab"],
+jawaban:"Indonesia"
+},
 ];
-
+soalData.sort(() => Math.random() - 0.5);
 let indexSoal = 0;
 let jawabanUser = [];
 
@@ -239,7 +255,11 @@ data.pilihan.forEach((p)=>{
 
 pilihanHTML += `
 <label class="opsi">
-<input type="radio" name="jawaban" value="${p}">
+<input type="radio"
+name="jawaban"
+value="${p}"
+${jawabanUser[indexSoal] == p ? 'checked' : ''}
+>
 ${p}
 </label>
 `;
@@ -250,14 +270,35 @@ document.getElementById('pilihan').innerHTML =
 pilihanHTML;
 
 }
+document.querySelectorAll('input[name=jawaban]')
+.forEach((radio)=>{
 
+radio.addEventListener('change',()=>{
+
+simpanJawaban();
+
+setTimeout(()=>{
+
+if(indexSoal < soalData.length-1){
+
+indexSoal++;
+
+tampilSoal();
+
+}
+
+},300);
+
+});
+
+});
 function nextSoal(){
 
 simpanJawaban();
 
 if(indexSoal < soalData.length-1){
 
-indexSoal++;
+"Soal " + (indexSoal+1) + " / " + soalData.length;
 
 tampilSoal();
 
