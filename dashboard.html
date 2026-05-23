@@ -253,7 +253,15 @@ Kembali ke Ujian
 </div>
 
 <div class="container">
+<div style="background:white;padding:20px;border-radius:20px;margin-bottom:20px;box-shadow:0 5px 15px rgba(0,0,0,0.05);">
 
+<h2 style="color:#166534;">
+Selamat Datang
+</h2>
+
+<p id="namaSiswa" style="margin-top:10px;font-size:20px;font-weight:bold;"></p>
+
+</div>
 <div class="banner">
 <img src="banner.png">
 </div>
@@ -386,6 +394,11 @@ document.addEventListener('copy',e=>e.preventDefault());
 document.addEventListener('paste',e=>e.preventDefault());
 
 </script>
+<script>
 
+document.getElementById("namaSiswa").innerText =
+localStorage.getItem("namaSiswa");
+
+</script>
 </body>
 </html>
