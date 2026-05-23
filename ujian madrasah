@@ -1,0 +1,302 @@
+```html
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Matsahad 62 - Aplikasi Ujian</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background: #f4f7f5;
+      color: #1f2937;
+    }
+
+    .header {
+      background: white;
+      padding: 18px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+      position: sticky;
+      top: 0;
+      z-index: 999;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .logo img {
+      width: 50px;
+      height: 50px;
+      border-radius: 12px;
+    }
+
+    .logo h1 {
+      font-size: 20px;
+      color: #166534;
+    }
+
+    .container {
+      padding: 20px;
+    }
+
+    .welcome {
+      background: linear-gradient(135deg,#dff5e5,#b8e5c5);
+      border-radius: 20px;
+      padding: 25px;
+      margin-bottom: 20px;
+      color: #14532d;
+    }
+
+    .welcome h2 {
+      font-size: 28px;
+      margin-top: 8px;
+      margin-bottom: 10px;
+    }
+
+    .btn {
+      display: inline-block;
+      background: #166534;
+      color: white;
+      padding: 14px 22px;
+      border-radius: 12px;
+      text-decoration: none;
+      margin-top: 15px;
+      font-weight: bold;
+      border: none;
+      cursor: pointer;
+    }
+
+    .section-title {
+      font-size: 22px;
+      margin-bottom: 15px;
+      font-weight: bold;
+    }
+
+    .card {
+      background: white;
+      border-radius: 18px;
+      padding: 20px;
+      margin-bottom: 20px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    }
+
+    .exam-title {
+      font-size: 22px;
+      margin-bottom: 10px;
+      color: #166534;
+    }
+
+    .exam-info {
+      color: #6b7280;
+      margin-bottom: 15px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2,1fr);
+      gap: 15px;
+    }
+
+    .menu {
+      background: white;
+      border-radius: 18px;
+      padding: 20px;
+      text-align: center;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    }
+
+    .menu h3 {
+      margin-top: 10px;
+      margin-bottom: 5px;
+    }
+
+    .warning {
+      background: #fee2e2;
+      color: #991b1b;
+      padding: 15px;
+      border-radius: 12px;
+      margin-top: 20px;
+      font-size: 14px;
+    }
+
+    .fullscreen-warning {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.85);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      z-index: 99999;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .fullscreen-warning div {
+      background: #111827;
+      padding: 30px;
+      border-radius: 20px;
+      max-width: 400px;
+    }
+
+    @media(max-width:600px){
+      .grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="fullscreen-warning" id="warningBox">
+    <div>
+      <h2>⚠ Keluar dari Aplikasi Terdeteksi</h2>
+      <p style="margin-top:15px">
+        Anda terdeteksi membuka aplikasi lain atau keluar dari mode ujian.
+      </p>
+
+      <button class="btn" onclick="backFullscreen()">
+        Kembali ke Ujian
+      </button>
+    </div>
+  </div>
+
+  <div class="header">
+    <div class="logo">
+      <img src="logo MTS BARU copy 2.png" alt="Logo Matsahad 62">
+
+      <div>
+        <h1>Matsahad 62</h1>
+        <p>Aplikasi Ujian</p>
+      </div>
+    </div>
+
+    <div>🔔</div>
+  </div>
+
+  <div class="container">
+
+    <div class="welcome">
+      <p>Selamat Datang</p>
+      <h2>Siswa Matsahad 62</h2>
+      <p>Semangat mengerjakan ujian hari ini.</p>
+
+      <button class="btn" onclick="mulaiUjian()">
+        Mulai Ujian
+      </button>
+    </div>
+
+    <div class="section-title">Ujian Aktif</div>
+
+    <div class="card">
+      <div class="exam-title">Ujian Akhir Semester</div>
+
+      <div class="exam-info">
+        Mata Pelajaran: Matematika<br>
+        Jam: 08:00 - 10:00
+      </div>
+
+      <button class="btn" onclick="mulaiUjian()">
+        Kerjakan Sekarang
+      </button>
+    </div>
+
+    <div class="section-title">Menu</div>
+
+    <div class="grid">
+      <div class="menu">
+        📄
+        <h3>Daftar Ujian</h3>
+        <p>Lihat semua ujian</p>
+      </div>
+
+      <div class="menu">
+        📊
+        <h3>Riwayat</h3>
+        <p>Hasil ujian</p>
+      </div>
+
+      <div class="menu">
+        📚
+        <h3>Materi</h3>
+        <p>Materi belajar</p>
+      </div>
+
+      <div class="menu">
+        ❓
+        <h3>Bantuan</h3>
+        <p>Panduan aplikasi</p>
+      </div>
+    </div>
+
+    <div class="warning">
+      ⚠ Saat ujian berlangsung peserta tidak diperbolehkan membuka aplikasi lain.
+    </div>
+
+  </div>
+
+  <script>
+
+    let pelanggaran = 0;
+
+    function mulaiUjian() {
+      aktifFullscreen();
+      alert("Mode ujian dimulai");
+    }
+
+    async function aktifFullscreen() {
+      const docElm = document.documentElement;
+
+      if (docElm.requestFullscreen) {
+        await docElm.requestFullscreen();
+      }
+    }
+
+    async function backFullscreen() {
+      document.getElementById('warningBox').style.display = 'none';
+      aktifFullscreen();
+    }
+
+    // Deteksi keluar tab / buka aplikasi lain
+    document.addEventListener('visibilitychange', function () {
+
+      if (document.hidden) {
+        pelanggaran++;
+
+        document.getElementById('warningBox').style.display = 'flex';
+
+        console.log('Pelanggaran:', pelanggaran);
+      }
+    });
+
+    // Cegah klik kanan
+    document.addEventListener('contextmenu', event => event.preventDefault());
+
+    // Cegah copy paste
+    document.addEventListener('copy', e => e.preventDefault());
+    document.addEventListener('paste', e => e.preventDefault());
+
+    // Deteksi keluar fullscreen
+    document.addEventListener('fullscreenchange', () => {
+      if (!document.fullscreenElement) {
+        document.getElementById('warningBox').style.display = 'flex';
+      }
+    });
+
+  </script>
+
+</body>
+</html>
