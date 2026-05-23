@@ -197,6 +197,11 @@ Kembali
 </div>
 
 <script>
+
+const mapel = "Matematika";
+
+const soalData = [
+
 {
 soal:"2 + 2 = ?",
 pilihan:["3","4","5","6"],
@@ -207,10 +212,19 @@ jawaban:"4"
 soal:"Ibukota Indonesia adalah?",
 pilihan:["Bandung","Jakarta","Surabaya","Medan"],
 jawaban:"Jakarta"
+},
+
+{
+soal:"10 x 10 = ?",
+pilihan:["10","50","100","150"],
+jawaban:"100"
 }
 
 ];
+
+// acak soal
 soalData.sort(() => Math.random() - 0.5);
+
 let indexSoal = 0;
 let jawabanUser = [];
 
@@ -219,7 +233,7 @@ function tampilSoal(){
 let data = soalData[indexSoal];
 
 document.getElementById('nomor').innerText =
-"Soal " + (indexSoal+1);
+"Soal " + (indexSoal+1) + " / " + soalData.length;
 
 document.getElementById('soal').innerText =
 data.soal;
@@ -230,12 +244,14 @@ data.pilihan.forEach((p)=>{
 
 pilihanHTML += `
 <label class="opsi">
+
 <input type="radio"
 name="jawaban"
 value="${p}"
-${jawabanUser[indexSoal] == p ? 'checked' : ''}
->
+${jawabanUser[indexSoal] == p ? 'checked' : ''}>
+
 ${p}
+
 </label>
 `;
 
@@ -244,7 +260,7 @@ ${p}
 document.getElementById('pilihan').innerHTML =
 pilihanHTML;
 
-}
+// auto next
 document.querySelectorAll('input[name=jawaban]')
 .forEach((radio)=>{
 
@@ -267,13 +283,16 @@ tampilSoal();
 });
 
 });
+
+}
+
 function nextSoal(){
 
 simpanJawaban();
 
 if(indexSoal < soalData.length-1){
 
-"Soal " + (indexSoal+1) + " / " + soalData.length;
+indexSoal++;
 
 tampilSoal();
 
@@ -334,12 +353,14 @@ document.getElementById('hasil').style.display='block';
 
 document.getElementById('nilai').innerHTML =
 `
-Jawaban Benar: ${benar}<br><br>
-Nilai Anda: <b>${nilai}</b>
+Mapel : ${mapel}<br><br>
+Jawaban Benar : ${benar}<br><br>
+Nilai Anda : <b>${nilai}</b>
 `;
 
 }
 
+// timer
 let waktu = 1800;
 
 setInterval(()=>{
@@ -359,6 +380,26 @@ submitUjian();
 }
 
 },1000);
+
+// fullscreen
+async function fullscreenMode(){
+
+const el = document.documentElement;
+
+if(el.requestFullscreen){
+
+await el.requestFullscreen();
+
+}
+
+}
+
+fullscreenMode();
+
+// anti refresh
+window.onbeforeunload = function () {
+return "Ujian sedang berlangsung";
+};
 
 tampilSoal();
 
