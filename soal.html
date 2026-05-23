@@ -153,6 +153,8 @@ color:#166534;
 font-weight:bold;
 }
 </style>
+  <link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#166534">
 </head>
 <div class="bottom-nav">
 
@@ -454,6 +456,13 @@ return "Ujian sedang berlangsung";
 };
 
 tampilSoal();
+<script>
+
+if ('serviceWorker' in navigator) {
+
+navigator.serviceWorker.register('service-worker.js');
+
+}
 
 </script>
 
