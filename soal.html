@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>CBT Matsahad 62</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,sans-serif;
+}
+
+body{
+background:#f3f7f4;
+padding:20px;
+padding-bottom:100px;
+}
+
+.header{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:20px;
+}
+
+.title{
+font-size:24px;
+font-weight:bold;
+color:#166534;
+}
+
+.timer{
+background:#166534;
+color:white;
+padding:10px 18px;
+border-radius:12px;
+font-weight:bold;
+}
+
+.card{
+background:white;
+padding:25px;
+border-radius:25px;
+box-shadow:0 5px 15px rgba(0,0,0,0.05);
+}
+
+.nomor{
+font-size:14px;
+color:#6b7280;
+margin-bottom:10px;
+}
+
+.soal{
+font-size:22px;
+font-weight:bold;
+margin-bottom:25px;
+line-height:1.5;
+}
+
+.pilihan{
+display:flex;
+flex-direction:column;
+gap:15px;
+}
+
+.opsi{
+padding:16px;
+border:2px solid #d1d5db;
+border-radius:15px;
+cursor:pointer;
+transition:0.2s;
+}
+
+.opsi:hover{
+border-color:#166534;
+background:#ecfdf5;
+}
+
+.opsi input{
+margin-right:10px;
+}
+
+.nav{
+display:flex;
+justify-content:space-between;
+margin-top:25px;
+}
+
+button{
+padding:14px 20px;
+border:none;
+border-radius:14px;
+font-size:16px;
+font-weight:bold;
+cursor:pointer;
+}
+
+.prev{
+background:#d1d5db;
+}
+
+.next{
+background:#166534;
+color:white;
+}
+
+.submit{
+background:#dc2626;
+color:white;
+width:100%;
+margin-top:25px;
+}
+
+.hasil{
+display:none;
+background:white;
+padding:30px;
+border-radius:25px;
+text-align:center;
+box-shadow:0 5px 15px rgba(0,0,0,0.05);
+}
+
+.hasil h1{
+color:#166534;
+margin-bottom:15px;
+}
+
+</style>
+</head>
+
+<body>
+
+<div id="ujian">
+
+<div class="header">
+
+<div class="title">
+CBT Matsahad 62
+</div>
+
+<div class="timer" id="timer">
+30:00
+</div>
+
+</div>
+
+<div class="card">
+
+<div class="nomor" id="nomor">
+Soal 1
+</div>
+
+<div class="soal" id="soal">
+Loading...
+</div>
+
+<div class="pilihan" id="pilihan">
+</div>
+
+<div class="nav">
+
+<button class="prev" onclick="prevSoal()">
+← Sebelumnya
+</button>
+
+<button class="next" onclick="nextSoal()">
+Berikutnya →
+</button>
+
+</div>
+
+<button class="submit" onclick="submitUjian()">
+Selesai Ujian
+</button>
+
+</div>
+
+</div>
+
+<div class="hasil" id="hasil">
+
+<h1>Ujian Selesai</h1>
+
+<p id="nilai"></p>
+
+<br>
+
+<button class="next" onclick="window.location.href='dashboard.html'">
+Kembali
+</button>
+
+</div>
+
+<script>
+
+const soalData = [
+
+{
+soal:"2 + 2 = ?",
+pilihan:["3","4","5","6"],
+jawaban:"4"
+},
+
+{
+soal:"Ibukota Indonesia adalah?",
+pilihan:["Bandung","Jakarta","Surabaya","Medan"],
+jawaban:"Jakarta"
+},
+
+{
+soal:"5 x 5 = ?",
+pilihan:["10","15","20","25"],
+jawaban:"25"
+}
+
+];
+
+let indexSoal = 0;
+let jawabanUser = [];
+
+function tampilSoal(){
+
+let data = soalData[indexSoal];
+
+document.getElementById('nomor').innerText =
+"Soal " + (indexSoal+1);
+
+document.getElementById('soal').innerText =
+data.soal;
+
+let pilihanHTML = "";
+
+data.pilihan.forEach((p)=>{
+
+pilihanHTML += `
+<label class="opsi">
+<input type="radio" name="jawaban" value="${p}">
+${p}
+</label>
+`;
+
+});
+
+document.getElementById('pilihan').innerHTML =
+pilihanHTML;
+
+}
+
+function nextSoal(){
+
+simpanJawaban();
+
+if(indexSoal < soalData.length-1){
+
+indexSoal++;
+
+tampilSoal();
+
+}
+
+}
+
+function prevSoal(){
+
+simpanJawaban();
+
+if(indexSoal > 0){
+
+indexSoal--;
+
+tampilSoal();
+
+}
+
+}
+
+function simpanJawaban(){
+
+let pilih =
+document.querySelector('input[name=jawaban]:checked');
+
+if(pilih){
+
+jawabanUser[indexSoal] = pilih.value;
+
+}
+
+}
+
+function submitUjian(){
+
+simpanJawaban();
+
+let benar = 0;
+
+for(let i=0;i<soalData.length;i++){
+
+if(jawabanUser[i] == soalData[i].jawaban){
+
+benar++;
+
+}
+
+}
+
+let nilai = Math.round(
+(benar / soalData.length) * 100
+);
+
+document.getElementById('ujian').style.display='none';
+
+document.getElementById('hasil').style.display='block';
+
+document.getElementById('nilai').innerHTML =
+`
+Jawaban Benar: ${benar}<br><br>
+Nilai Anda: <b>${nilai}</b>
+`;
+
+}
+
+let waktu = 1800;
+
+setInterval(()=>{
+
+let menit = Math.floor(waktu/60);
+let detik = waktu%60;
+
+document.getElementById('timer').innerText =
+`${menit}:${detik < 10 ? '0'+detik : detik}`;
+
+waktu--;
+
+if(waktu < 0){
+
+submitUjian();
+
+}
+
+},1000);
+
+tampilSoal();
+
+</script>
+
+</body>
+</html>
