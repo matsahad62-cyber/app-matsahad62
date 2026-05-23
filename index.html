@@ -81,6 +81,8 @@ color:#6b7280;
 }
 
 </style>
+  <link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#166534">
 </head>
 
 <body>
@@ -127,7 +129,11 @@ alert("Username atau Password salah");
 }
 
 }
+if ('serviceWorker' in navigator) {
 
+navigator.serviceWorker.register('service-worker.js');
+
+}
 </script>
 
 </body>
