@@ -27,11 +27,63 @@ padding:12px 18px;
 border-radius:12px;
 margin-top:15px;
 }
+.bottom-nav{
+position:fixed;
+bottom:0;
+left:0;
+width:100%;
+background:white;
+display:flex;
+justify-content:space-around;
+padding:12px 0;
+box-shadow:0 -2px 10px rgba(0,0,0,0.08);
+}
 
+.nav-item{
+text-align:center;
+font-size:14px;
+color:#374151;
+cursor:pointer;
+}
+
+.nav-item:hover{
+color:#166534;
+font-weight:bold;
+}
 </style>
 
 </head>
+<div class="bottom-nav">
 
+<div class="nav-item"
+onclick="window.location.href='dashboard.html'">
+
+🏠<br>Beranda
+
+</div>
+
+<div class="nav-item"
+onclick="window.location.href='ujian.html'">
+
+📝<br>Ujian
+
+</div>
+
+<div class="nav-item"
+onclick="window.location.href='riwayat.html'">
+
+🕒<br>Riwayat
+
+</div>
+
+<div class="nav-item"
+onclick="window.location.href='akun.html'">
+
+👤<br>Akun
+
+</div>
+
+</div>
 <body>
 
 <h1>Daftar Ujian</h1>
